@@ -1,0 +1,269 @@
+// appInitialize
+
+Step 1: First call the appInitialize api with required params and in response you will get token and tempId.
+Step 2: Token you have to pass in header of Authorization for exmaple { Authorization : "JWT " + tokenValue }.
+Step 3: After Calling login api please update token and userId.
+
+// Request
+{
+    "deviceId" : "123456", // required
+    "deviceToken" : "789456", // firebase token required
+    "os" : "IOS", // required
+    "osVersion" : "11.3", // required
+    "platform" : "iPhone", // required
+    "make" : "iPhone", // required
+    "model" : "iPhone", // required
+    "manufacturer" : "apple", // required
+    "screenWidth" : "375", // required
+    "screenHeight" : "667" // required
+}
+
+// Response on success
+{
+    "code": 997,
+    "message": "Success",
+    "data": {
+        "tempId": "5c63f6803f7ee43c20c1d740", // temporary Id
+        "token": "eyJhbGciOiJIxuOqP4YQaE1egtGpUhssiFQrAxYYyNkktmwOpleFMtU" // JWT token 
+    },
+    "success": true
+}
+
+// Login API
+// Request
+{
+    "accessToken": "EAAdsiahdZA3g",
+	  "loginType": "facebook",
+	  "loginId": "7054"
+}
+
+// Response on success
+
+{
+    "code": 1007,
+    "message": "Login successfully",
+    "data": {
+        "type": "user",
+        "appUserId": "5c654c6fe97fca47e974c214",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpMDE097Qs2ocGm4gOmr5HpOLjy4"
+    },
+    "success": true
+}
+
+
+//getProducts API
+
+// Request
+{
+  "pageNo" : 1, // page no (required)
+  "pageSize" : 5, // product count (required)
+  "search_key": "Gold" // if any search pass string other wise blank 
+}
+
+
+// Response on success
+{
+    "code": 997,
+    "message": "Success",
+    "data": [
+        {
+            "_id": "5c641e16d450fc8d48aa1933", // productId 
+            "type": "Ring",
+            "category": "Gold",
+            "sku": "NU-R-M-123019",
+            "name": "MISTR-Gold",
+            "description": "Statement Gold",
+            "price": "12222.00",
+            "quantity": 2,
+            "dateCreated": "2019-01-31T12:43:48.764Z",
+            "dateUpdated": "2019-02-01T08:55:09.742Z",
+            "isDeleted": true,
+            "isActive": true
+        }
+    ],
+    "success": true
+}
+
+//getProductById API
+
+// Request
+{
+  "productId" : "5c641e16d450fc8d48aa1933" //  (required)
+}
+
+// Response on success
+{
+    "code": 997,
+    "message": "Success",
+    "data": {
+        "_id": "5c641e16d450fc8d48aa1933", // productId 
+        "type": "Ring",
+        "category": "Gold",
+        "sku": "NU-R-M-123019",
+        "name": "MISTR-Gold",
+        "description": "Statement Gold",
+        "price": "12222.00",
+        "quantity": 2,
+        "dateCreated": "2019-01-31T12:43:48.764Z",
+        "dateUpdated": "2019-02-01T08:55:09.742Z",
+        "isDeleted": true,
+        "isActive": true
+    },
+    "success": true
+}
+
+
+//addToCart API
+
+// Request
+{
+    "productId" : "5c641a63d450fc8d48aa0581",//  (required)
+    "qty" : "10"//  (required)
+}
+
+// Response on success
+{
+   "code": 1001,
+   "message": "Product already in cart",
+   "data": {},
+   "success": false
+}
+{
+   "code": 1000,
+   "message": "Product added successfully",
+   "data": {},
+   "success": true
+}
+{
+   "code": 1002,
+   "message": "Product out of stock",
+   "data": {},
+   "success": false
+}
+
+
+//getCart API
+
+// Request
+{}
+
+// Response on success
+{
+   "code": 997,
+   "message": "Success",
+   "data": {
+       "carItems": [
+           {
+               "cartId": "5c642856af943c42378038be",
+               "cartQuantity": 10,
+               "buyingPrice": "10020",
+               "originalPrice": "1002.00",
+               "productId": "5c641a63d450fc8d48aa0581",
+               "sku": "NU-R-M-123012",
+               "price": "1002.00",
+               "quantity": 24
+           },
+           {
+               "cartId": "5c650622c524bb4572c9e42b",
+               "cartQuantity": 1,
+               "buyingPrice": "12222.00",
+               "originalPrice": "12222.00",
+               "productId": "5c641e16d450fc8d48aa1933",
+               "sku": "NU-R-M-123019",
+               "price": "12222.00",
+               "quantity": 2
+           }
+       ]
+   },
+   "success": true
+}
+
+{
+   "code": 996,
+   "message": "No data found",
+   "data": {},
+   "success": false
+}
+
+
+//updateCart API
+
+// Request
+{
+    "cartId": "5c642856af943c42378038be",
+    "productId" : "5c641a63d450fc8d48aa0581",
+    "qty" : "12"
+}
+
+// Response on success
+{
+   "code": 1003,
+   "message": "Cart updated successfully",
+   "data": {},
+   "success": true
+}
+{
+   "code": 1002,
+   "message": "Product out of stock",
+   "data": {},
+   "success": false
+}
+
+
+
+//removeCart API
+
+// Request
+{
+    "cartId": "5c642856af943c42378038be",
+    "productId" : "5c641a63d450fc8d48aa0581"
+}
+// Response on success
+{
+   "code": 1004,
+   "message": "Product removed successfully from cart",
+   "data": {},
+   "success": true
+}
+
+
+//checkout API
+
+// Request
+{ }
+// Response on success
+{
+   "code": 1006,
+   "message": "Checkout successfully",
+   "data": {
+       "orderId": "ORDER83680"
+   },
+   "success": true
+}
+
+
+
+
+// Data missing 
+{
+    "code": 995,
+    "message": "Required data missing",
+    "data": {},
+    "success": false
+}
+
+// Auth error
+{
+    "code": 998,
+    "message": "Authentication error!",
+    "data": {},
+    "success": false
+}
+// Exception error
+{
+    "code": 999,
+    "message": "Something went wrong!",
+    "data": {},
+    "success": false
+}
+
